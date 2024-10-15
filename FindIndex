@@ -2,18 +2,18 @@ public class FindIndex {
     public static int findFixedPoint(int[] A, int left, int right ) {
         if (left <= right) {
             int mid = left + (right - left) / 2;
-
-            if (A[mid] == mid) {
+                 
+            if (A[mid] == mid) {  // ตรวจสอบว่า A[mid] == mid หรือไม่
                 return mid;
             }
 
-            if (A[mid] > mid) {
+            if (A[mid] > mid) { // ถ้า A[mid] > mid ให้ค้นหาทางซ้าย
                 return findFixedPoint(A, left, mid - 1);
             } else {
-                return findFixedPoint(A, mid + 1, right);
+                return findFixedPoint(A, mid + 1, right); // ถ้า A[mid] < mid ให้ค้นหาทางขวา
             }
         }
-        return -1;
+        return -1; // ถ้าไม่พบค่า
 }
 
 public static void main(String[] args) {
