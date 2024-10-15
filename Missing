@@ -1,0 +1,36 @@
+import java.util.Arrays;
+
+public class Missing {
+    
+    public static int findMissing(int[] arr, int left, int right) {
+        if (left == right) {
+            return left + 1;  // ต้อง return ค่า
+        }
+
+        int mid = (left + right) / 2;
+        int countLeft = 0;
+
+        // นับจำนวนตัวเลขในครึ่งแรก
+        for (int i = left; i <= mid; i++) {
+            if (arr[i] >= left + 1 && arr[i] <= mid + 1) {
+                countLeft++;
+            }
+        }
+
+        // ถ้าจำนวนในครึ่งแรกไม่ครบ แสดงว่าค่าที่หายอยู่ในครึ่งแรก
+        if (countLeft < (mid - left + 1)) {
+            return findMissing(arr, left, mid);
+        } else {
+            // ถ้าจำนวนในครึ่งแรกครบ ให้ค้นหาในครึ่งหลัง
+            return findMissing(arr, mid + 1, right);
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {3, 7, 1, 2, 8, 4, 5};  // ค่าที่หายคือ 6
+        int n = arr.length;
+        Arrays.sort(arr);  // เรียกใช้ Arrays.sort() ไม่ใช่ Array.sort()
+        int missing = findMissing(arr, 0, n - 1);
+        System.out.println("Missing Value is: " + missing);
+    }
+}
