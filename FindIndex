@@ -1,0 +1,29 @@
+public class FindIndex {
+    public static int findFixedPoint(int[] A, int left, int right ) {
+        if (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (A[mid] == mid) {
+                return mid;
+            }
+
+            if (A[mid] > mid) {
+                return findFixedPoint(A, left, mid - 1);
+            } else {
+                return findFixedPoint(A, mid + 1, right);
+            }
+        }
+        return -1;
+}
+
+public static void main(String[] args) {
+    int[] A = {-10,-5,0,3,7};
+    int n = A.length;
+    int result = findFixedPoint(A, 0, n-1);
+    if (result == -1) {
+        System.out.println("ไม่พบจุดคงที่");
+    } else {
+        System.out.println("จุดคงที่อยู่ที่ดัชนี " + result);
+    }
+  }
+}
